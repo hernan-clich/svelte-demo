@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { Link, Router, Route } from 'svelte-navigator';
+  import { Router, Route } from 'svelte-navigator';
   import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+  import Header from './components/Header.svelte';
   import Home from './screens/Home.svelte';
   import About from './screens/About/index.svelte';
 
@@ -11,14 +12,13 @@
       },
     },
   });
+
+  let appName = '<dev_jokes/>';
 </script>
 
 <QueryClientProvider client={queryClient}>
   <Router>
-    <header>
-      <Link to="/">Jokes</Link>
-      <Link to="/about">About</Link>
-    </header>
+    <Header {appName} />
     <div>
       <Route path="/">
         <Home />

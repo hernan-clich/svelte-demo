@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { fade } from 'svelte/transition';
   import { useQuery } from '@sveltestack/svelte-query';
-  import { onMount } from 'svelte';
   import Loader from '../components/Loader.svelte';
   import type { Joke } from '../interfaces/jokes';
 
@@ -22,7 +22,7 @@
 {:else if $queryResult.data}
   <div class="jokes-wrapper">
     {#each $queryResult.data as joke}
-      <ul class="joke-container">
+      <ul class="joke-container" in:fade>
         <li class="setup">{joke.setup}</li>
         <li class="punchline">{joke.punchline}</li>
       </ul>
@@ -41,11 +41,11 @@
   .jokes-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    padding: 0 2em;
   }
   .joke-container {
     background-color: $rio-grande;
-    border-top: 0.75rem solid $verdun-green;
+    border-top: 0.75em solid $verdun-green;
     color: $verdun-green;
     clip-path: polygon(
       0% 0%,
@@ -59,14 +59,14 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
-    margin: 2rem;
-    padding: 2rem 2rem 8rem;
+    margin: 2em;
+    padding: 2em 2em 8em;
     transform: rotateX(10deg) rotateY(-10deg) scale(1);
     transition: all 250ms;
 
     &:hover {
       background-color: $aqua-deep;
-      border-top: 0.75rem solid $robins-egg-blue;
+      border-top: 0.75em solid $robins-egg-blue;
       color: $alto;
       transform: scale(1.05);
     }
@@ -75,7 +75,7 @@
   .setup,
   .punchline {
     list-style: none;
-    padding: 1rem 0;
+    padding: 1em 0;
     text-align: center;
   }
 
