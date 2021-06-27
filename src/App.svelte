@@ -2,6 +2,7 @@
   import { Router, Route } from 'svelte-navigator';
   import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
   import Header from './components/Header.svelte';
+  import ROUTES from './constants/routes';
   import Home from './screens/Home.svelte';
   import About from './screens/About/index.svelte';
 
@@ -20,10 +21,10 @@
   <Router>
     <Header {appName} />
     <div>
-      <Route path="/">
+      <Route path={ROUTES.HOME}>
         <Home />
       </Route>
-      <Route path="/about">
+      <Route path={ROUTES.ABOUT}>
         <About />
       </Route>
     </div>

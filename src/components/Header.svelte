@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { Link } from 'svelte-navigator';
   import { fade } from 'svelte/transition';
+  import ROUTES from '../constants/routes';
 
   export let appName: string;
 
@@ -18,8 +19,8 @@
       >
     {/each}
     <div in:fade={{ delay: 3000, duration: 500 }}>
-      <Link to="/">Jokes</Link>
-      <Link to="/about">About</Link>
+      <Link to={ROUTES.HOME}>Jokes</Link>
+      <Link to={ROUTES.ABOUT}>About</Link>
     </div>
   {/if}
 </header>
