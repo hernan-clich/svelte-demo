@@ -1,5 +1,7 @@
 <script lang="ts">
   import { useQuery } from '@sveltestack/svelte-query';
+  import { onMount } from 'svelte';
+  import Loader from '../components/Loader.svelte';
   import type { Joke } from '../interfaces/jokes';
 
   const jokesUrl =
@@ -11,9 +13,12 @@
 
 <h1 class="title">Jokes</h1>
 {#if $queryResult.isLoading}
-  <span>Loading...</span>
-{:else if $queryResult.error}
-  <span>Error</span>
+  <Loader />
+{:else if $queryResult.isError}
+  <pre
+    class="error">
+    There was an error fetching the jokes, please try again later
+  </pre>
 {:else if $queryResult.data}
   <div class="jokes-wrapper">
     {#each $queryResult.data as joke}
@@ -25,7 +30,9 @@
   </div>
 {/if}
 
-<style>
+<style lang="scss">
+  @import '../scss/colors.scss';
+
   .title {
     font-size: 3rem;
     text-align: center;
@@ -37,13 +44,32 @@
     padding: 0 2rem;
   }
   .joke-container {
-    border: 0.5rem solid rgba(205, 188, 0, 1);
-    border-radius: 1rem;
+    background-color: $rio-grande;
+    border-top: 0.75rem solid $verdun-green;
+    color: $verdun-green;
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 75%,
+      70% 75%,
+      75% 100%,
+      60% 75%,
+      0% 75%
+    );
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
     margin: 2rem;
-    padding: 2rem;
+    padding: 2rem 2rem 8rem;
+    transform: rotateX(10deg) rotateY(-10deg) scale(1);
+    transition: all 250ms;
+
+    &:hover {
+      background-color: $aqua-deep;
+      border-top: 0.75rem solid $robins-egg-blue;
+      color: $alto;
+      transform: scale(1.05);
+    }
   }
 
   .setup,
@@ -64,7 +90,14 @@
     font-weight: 500;
   }
 
-  @media (max-width: 800px) {
+  .error {
+    color: red;
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
     .jokes-wrapper {
       grid-template-columns: 1fr;
     }
