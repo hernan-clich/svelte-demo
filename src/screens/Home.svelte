@@ -40,7 +40,8 @@
 
   .jokes-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fill, minmax(min(550px, 100%), 1fr));
     padding: 0 2em;
   }
   .joke-container {
@@ -88,6 +89,7 @@
   .punchline {
     font-size: 1.2rem;
     font-weight: 500;
+    padding-bottom: 1.5rem;
   }
 
   .error {
@@ -95,11 +97,5 @@
     font-size: 2rem;
     font-weight: 800;
     text-align: center;
-  }
-
-  @media (max-width: 900px) {
-    .jokes-wrapper {
-      grid-template-columns: 1fr;
-    }
   }
 </style>
