@@ -27,12 +27,14 @@
   }
 
   .title {
-    margin-bottom: 2em;
+    font-size: clamp(1.75rem, 2vw, 9rem);
+    margin: 2em 0;
+    text-align: center;
   }
 
   .login-btn {
     border: 4px solid $rio-grande;
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 1.5vw, 8rem);
     font-weight: 800;
     padding: 1em 2.5em;
     transform: scale(1);

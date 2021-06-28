@@ -2,6 +2,7 @@
 
 .title {
   color: $rio-grande;
+  font-size: clamp(1.75rem, 2vw, 9rem);
   margin-bottom: 2em;
   text-align: center;
 }
@@ -18,7 +19,7 @@
     0% 75%
   );
   color: $cod-gray;
-  font-size: 3rem;
+  font-size: clamp(2.15rem, 2.7vw, 15rem);
   font-style: italic;
   font-weight: 700;
   margin: 0 auto;

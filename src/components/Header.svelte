@@ -1,17 +1,21 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Link } from 'svelte-navigator';
+  import { Link, useNavigate } from 'svelte-navigator';
   import { fade } from 'svelte/transition';
   import ROUTES from '../constants/routes';
   import isLoggedIn from '../stores/store';
 
   export let appName: string;
+  const navigate = useNavigate();
 
   let visible = false;
 
   onMount(() => (visible = true));
 
-  const handleClick = () => isLoggedIn.update(() => false);
+  const handleClick = () => {
+    isLoggedIn.update(() => false);
+    navigate(ROUTES.LOGIN, { replace: true });
+  };
 </script>
 
 <header class="container">
@@ -23,7 +27,7 @@
     {/each}
     <nav class="navbar" in:fade={{ delay: 3000, duration: 500 }}>
       {#if $isLoggedIn}
-        <div>
+        <div class="auth-nav">
           <Link to={ROUTES.HOME}>Jokes</Link>
           <Link to={ROUTES.ABOUT}>About</Link>
         </div>
@@ -48,7 +52,7 @@
   }
 
   .logo {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 2.25vw, 20rem);
     font-style: italic;
     font-weight: 600;
   }
@@ -61,8 +65,13 @@
     padding-right: 2em;
   }
 
+  .auth-nav {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
   :global(a) {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 1.15vw, 10rem);
     font-style: normal;
     font-weight: 600;
     margin: 0 1em;
@@ -77,7 +86,7 @@
     background-color: $rio-grande;
     border: 4px solid $rio-grande;
     color: $cod-gray;
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 1.1vw, 10rem);
     font-style: normal;
     font-weight: 600;
     padding: 0.5em 1em;

@@ -15,10 +15,9 @@
 {#if $queryResult.isLoading}
   <Loader />
 {:else if $queryResult.isError}
-  <pre
-    class="error">
+  <p class="error">
     There was an error fetching the jokes, please try again later
-  </pre>
+  </p>
 {:else if $queryResult.data}
   <div class="jokes-wrapper">
     {#each $queryResult.data as joke}
@@ -34,14 +33,14 @@
   @import '../scss/colors.scss';
 
   .title {
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 2.75vw, 25rem);
     text-align: center;
   }
 
   .jokes-wrapper {
     display: grid;
     grid-gap: 2em;
-    grid-template-columns: repeat(auto-fill, minmax(min(550px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(550px, 100%), 2fr));
     padding: 0 2em;
   }
   .joke-container {
@@ -81,20 +80,20 @@
   }
 
   .setup {
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 1.5vw, 10rem);
     font-weight: 600;
     text-transform: uppercase;
   }
 
   .punchline {
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 1.2vw, 9rem);
     font-weight: 500;
     padding-bottom: 1.5rem;
   }
 
   .error {
     color: red;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 1.75vw, 9rem);
     font-weight: 800;
     text-align: center;
   }
