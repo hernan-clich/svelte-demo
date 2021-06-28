@@ -1,6 +1,7 @@
 enum ROUTES {
   HOME = '/',
-  ABOUT = '/about'
+  ABOUT = '/about',
+  LOGIN = '/login'
 }
 
 export default ROUTES;

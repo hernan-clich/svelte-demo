@@ -3,12 +3,15 @@
   import { Link } from 'svelte-navigator';
   import { fade } from 'svelte/transition';
   import ROUTES from '../constants/routes';
+  import isLoggedIn from '../stores/store';
 
   export let appName: string;
 
   let visible = false;
 
   onMount(() => (visible = true));
+
+  const handleClick = () => isLoggedIn.update(() => false);
 </script>
 
 <header class="container">
@@ -18,14 +21,26 @@
         >{char}</span
       >
     {/each}
-    <div in:fade={{ delay: 3000, duration: 500 }}>
-      <Link to={ROUTES.HOME}>Jokes</Link>
-      <Link to={ROUTES.ABOUT}>About</Link>
-    </div>
+    <nav class="navbar" in:fade={{ delay: 3000, duration: 500 }}>
+      {#if $isLoggedIn}
+        <div>
+          <Link to={ROUTES.HOME}>Jokes</Link>
+          <Link to={ROUTES.ABOUT}>About</Link>
+        </div>
+        <button class="logout" on:click={handleClick}>Logout</button>
+      {:else}
+        <div>
+          <Link to={ROUTES.LOGIN}>Login</Link>
+          <Link to={ROUTES.ABOUT}>About</Link>
+        </div>
+      {/if}
+    </nav>
   {/if}
 </header>
 
 <style lang="scss">
+  @import '../scss/colors';
+
   .container {
     align-items: center;
     display: flex;
@@ -38,6 +53,14 @@
     font-weight: 600;
   }
 
+  .navbar {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding-right: 2em;
+  }
+
   :global(a) {
     font-size: 1.25rem;
     font-style: normal;
@@ -47,6 +70,24 @@
 
     &:hover {
       font-style: italic;
+    }
+  }
+
+  .logout {
+    background-color: $rio-grande;
+    border: 4px solid $rio-grande;
+    color: $cod-gray;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    transform: scale(1);
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+      background-color: $cod-gray;
+      color: $rio-grande;
+      transform: scale(1.1);
     }
   }
 </style>

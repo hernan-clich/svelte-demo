@@ -2,8 +2,10 @@
   import { Router, Route } from 'svelte-navigator';
   import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
   import Header from './components/Header.svelte';
+  import PrivateRoute from './components/PrivateRoute.svelte';
   import ROUTES from './constants/routes';
   import Home from './screens/Home.svelte';
+  import Login from './screens/Login.svelte';
   import About from './screens/About/index.svelte';
 
   const queryClient = new QueryClient({
@@ -21,8 +23,11 @@
   <Router>
     <Header {appName} />
     <div>
-      <Route path={ROUTES.HOME}>
+      <PrivateRoute path={ROUTES.HOME}>
         <Home />
+      </PrivateRoute>
+      <Route path={ROUTES.LOGIN}>
+        <Login />
       </Route>
       <Route path={ROUTES.ABOUT}>
         <About />

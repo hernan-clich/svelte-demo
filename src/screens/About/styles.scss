@@ -1,3 +1,28 @@
+@import '../../scss/colors';
+
 .title {
-  color: black;
+  color: $rio-grande;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.message-wrapper {
+  background-color: $rio-grande;
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 75%,
+    70% 75%,
+    75% 100%,
+    60% 75%,
+    0% 75%
+  );
+  color: $cod-gray;
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 700;
+  margin: 0 auto;
+  padding: 2em 2em 5em;
+  text-align: center;
+  width: 85%;
 }
